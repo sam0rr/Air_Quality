@@ -1,8 +1,35 @@
-/* Global Styling */
+:root {
+    /* Global Colors */
+    --background-color: #20232a;
+    --header-gradient: linear-gradient(90deg, #76e0c6, #2575fc);
+    --card-background: #2b303b;
+    --card-hover-background: #344356;
+    --card-border-color: #3a3f47;
+    --text-primary: #ffffff;
+    --text-secondary: #bbbbbb;
+    --title-color: #76e0c6;
+    --highlight-color: #f2a365;
+    --button-background: #2575fc;
+    --button-hover-background: #6a11cb;
+    --footer-background: var(--header-gradient);
+
+    /* Shadows */
+    --card-shadow: 0 6px 10px rgba(0, 0, 0, 0.6);
+    --button-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    --carousel-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+
+    /* Font Sizes */
+    --header-font-size: 2rem;
+    --title-font-size: 1.6rem;
+    --text-font-size: 1.3rem;
+    --prediction-font-size: 1.4rem;
+    --carousel-title-font-size: 1.8rem;
+}
+
 body {
-    background-color: #20232a; /* Subtle dark background */
+    background-color: var(--background-color);
     font-family: 'Roboto', Arial, sans-serif;
-    color: #ffffff;
+    color: var(--text-primary);
     margin: 0;
     padding: 0;
     display: flex;
@@ -14,14 +41,13 @@ body {
 
 /* Header */
 header {
-    background: linear-gradient(90deg, #6a11cb, #2575fc); /* Vibrant gradient */
-    color: #ffffff;
+    background: var(--header-gradient);
+    color: var(--text-primary);
     text-align: center;
     padding: 20px 0;
-    font-size: 2rem;
+    font-size: var(--header-font-size);
     font-weight: bold;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    cursor: default; /* Default cursor for non-interactive elements */
 }
 
 /* Main Section */
@@ -35,36 +61,34 @@ main {
 
 /* Data Cards */
 .data-card {
-    border: 2px solid #3a3f47;
+    border: 2px solid var(--card-border-color);
     border-radius: 12px;
-    background: #2b303b;
+    background: var(--card-background);
     padding: 20px;
     text-align: center;
     transition: transform 0.3s ease, background-color 0.3s ease;
-    color: #ffffff;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.6);
+    color: var(--text-primary);
+    box-shadow: var(--card-shadow);
     user-select: none; /* Prevent text selection */
-    cursor: pointer; /* Pointer cursor for hoverable elements */
+    cursor: pointer;
 }
 
 .data-card:hover {
     transform: scale(1.05);
-    background-color: #344356;
+    background-color: var(--card-hover-background);
 }
 
-/* Data Card Titles */
 .data-card .card-title {
-    font-size: 1.6rem;
+    font-size: var(--title-font-size);
     font-weight: bold;
     margin-bottom: 10px;
-    color: #76e0c6;
+    color: var(--title-color);
 }
 
-/* Data Card Text */
 .data-card .card-text {
-    font-size: 1.3rem;
+    font-size: var(--text-font-size);
     font-weight: bold;
-    color: #f2a365;
+    color: var(--highlight-color);
 }
 
 /* Row Layout */
@@ -78,56 +102,157 @@ main {
 
 /* Buttons */
 button {
-    font-size: 1.2rem;
+    font-size: 1rem;
     padding: 12px 24px;
-    border-radius: 25px;
+    border-radius: 300px;
     border: none;
-    color: #ffffff;
-    background-color: #2575fc;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-    user-select: none;
+    color: var(--text-primary);
+    background-color: none;
     cursor: pointer;
+    margin-inline: 1rem;
 }
 
 button:hover {
-    background-color: #6a11cb;
+    background-color: var(--title-color);
 }
 
-/* Prediction Section */
-.prediction-section {
-    background: #2b303b;
+/* Carousel Container */
+#predictionCarousel {
+    background: var(--card-background);
+    border-radius: 15px;
     padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    color: #ffffff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-    margin: 20px 0;
-    width: 80%;
-    max-width: 600px;
+    box-shadow: var(--carousel-shadow);
+    margin-top: 20px;
+    width: 100%;
+    max-width: 800px;
+    position: relative;
+    overflow: hidden;
 }
 
-.prediction-section h3 {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-    color: #76e0c6;
+.predict-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 60%; /* Ensure alignment with carousel width */
 }
 
-.prediction-section p {
-    font-size: 1.4rem;
+.carousel h3 {
+    font-size: var(--carousel-title-font-size);
     font-weight: bold;
-    color: #f2a365;
+    color: var(--title-color);
+    text-align: center;
 }
 
-p {
-    margin: 0;
+.carousel p {
+    font-size: var(--prediction-font-size);
+    font-weight: bold;
+    color: var(--highlight-color);
+    text-align: center;
+}
+
+
+.carousel-inner {
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    text-align: center;
+}
+
+.carousel-item {
+    display: none;
+    gap: 1rem;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.carousel-item.active {
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    transform: scale(1.05);
+}
+
+.carousel h3 {
+    font-size: var(--carousel-title-font-size);
+    font-weight: bold;
+    color: var(--title-color);
+    margin-bottom: 10px;
+}
+
+.carousel p {
+    text-align: center;
+    align-items: center;
+    font-size: var(--prediction-font-size);
+    font-weight: bold;
+    color: var(--highlight-color);
+    width: 60%;
+    min-height: 50px;
+}
+
+/* Carousel Navigation Buttons */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-primary);
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    opacity: 1;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: none;
+    color: var(--title-color);
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+    background-color: none;
+    color: var(--highlight-color);
+}
+
+/* Indicators */
+.carousel-indicators [data-bs-target] {
+    background-color: var(--title-color);
+    border: none;
+    height: 12px;
+    width: 12px;
+    margin: 3px;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.carousel-indicators [data-bs-target].active {
+    transform: scale(1.5);
+    background-color: var(--highlight-color);
 }
 
 /* Footer */
 footer {
-    background: #121212;
-    color: #bbbbbb;
+    background: var(--footer-background);
+    color: var(--text-primary);
     text-align: center;
     font-size: 0.9rem;
-    user-select: none; /* Prevent text selection */
-    cursor: default; /* Default cursor for non-interactive footer */
+}
+
+p {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.carousel p {
+    width: 100%;
 }

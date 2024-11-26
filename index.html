@@ -54,10 +54,48 @@
             </div>
         </div>
 
-        <div class="prediction-section text-center mt-4">
-            <h3 class="text-light">Predicted Air Quality</h3>
-            <p id="prediction" class="fs-4 text-light">--</p>
+        <!-- Prediction Carousel -->
+        <div id="predictionCarousel" class="carousel slide text-center mt-4" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <h3>Predicted Air Quality</h3>
+                    <p id="prediction">--</p>
+                </div>
+                <div class="carousel-item">
+                    <h3>Dew Point</h3>
+                    <div class="predict-body">
+                        <p id="dewPoint">-- °C</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <h3>Heat Index</h3>
+                    <div class="predict-body">
+                        <p id="heatIndex">-- °C</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <h3>Comfort Level</h3>
+                    <div class="predict-body">
+                        <p id="comfortLevel">--</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#predictionCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#predictionCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#predictionCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                <button type="button" data-bs-target="#predictionCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#predictionCarousel" data-bs-slide-to="2"></button>
+                <button type="button" data-bs-target="#predictionCarousel" data-bs-slide-to="3"></button>
+            </div>
         </div>
+        
     </main>
 
     <footer class="text-center py-3">
