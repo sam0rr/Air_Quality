@@ -76,9 +76,9 @@ document.addEventListener("DOMContentLoaded", function () {
             applyPredictions(predictions);
         } else {
             applyPredictions({
-                airQuality: "Prediction unavailable.",
-                dewPoint: "-- °C",
-                heatIndex: "-- °C",
+                airQuality: "Unavailable",
+                dewPoint: "Unavailable",
+                heatIndex: "Unavailable",
                 comfortLevel: "Unavailable",
             });
         }
