@@ -2,11 +2,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function predictAirQuality(temperature, humidity, gasResistance) {
         if (humidity > 70 && gasResistance < 10000) {
             return "Air quality is likely to decline due to high humidity and low gas resistance.";
-        } else if (humidity < 50 && gasResistance > 15000) {
-            return "Air quality is likely to improve with low humidity and high gas resistance.";
-        } else {
-            return "Air quality is expected to remain stable.";
         }
+        if (humidity < 50 && gasResistance > 15000) {
+            return "Air quality is likely to improve with low humidity and high gas resistance.";
+        }
+        return "Air quality is expected to remain stable.";
     }
 
     function calculateDewPoint(temperature, humidity) {
@@ -31,16 +31,16 @@ document.addEventListener("DOMContentLoaded", function () {
             gasResistance > 15000
         ) {
             return "Very Comfortable";
-        } else if (
+        }
+        if (
             temperature < 22 ||
             temperature > 26 ||
             humidity < 30 ||
             humidity > 70
         ) {
             return "Uncomfortable";
-        } else {
-            return "Moderately Comfortable";
         }
+        return "Moderately Comfortable";
     }
 
     function getParsedValue(elementId, unit) {
@@ -50,48 +50,52 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function fetchSensorData() {
-        const temperature = getParsedValue("temperature", "°C");
-        const humidity = getParsedValue("humidity", "%");
-        const gasResistance = getParsedValue("gasResistance", "Ω");
-
-        return { temperature, humidity, gasResistance };
-    }
-
-    function updatePrediction() {
-        const { temperature, humidity, gasResistance } = fetchSensorData();
-
-        if (!isNaN(temperature) && !isNaN(humidity) && !isNaN(gasResistance)) {
-            const airQuality = predictAirQuality(temperature, humidity, gasResistance);
-            const dewPoint = calculateDewPoint(temperature, humidity);
-            const heatIndex = calculateHeatIndex(temperature, humidity);
-            const comfortLevel = calculateComfortLevel(temperature, humidity, gasResistance);
-
-            updateTextContent("prediction", airQuality);
-            updateTextContent("dewPoint", `${dewPoint} °C`);
-            updateTextContent("heatIndex", `${heatIndex} °C`);
-            updateTextContent("comfortLevel", comfortLevel);
-
-            console.log("Updated Predictions:", { airQuality, dewPoint, heatIndex, comfortLevel });
-        } else {
-            updateTextContent("prediction", "Prediction unavailable.");
-            updateTextContent("dewPoint", "-- °C");
-            updateTextContent("heatIndex", "-- °C");
-            updateTextContent("comfortLevel", "Unavailable");
-        }
+        return {
+            temperature: getParsedValue("temperature", "°C"),
+            humidity: getParsedValue("humidity", "%"),
+            gasResistance: getParsedValue("gasResistance", "Ω"),
+        };
     }
 
     function updateTextContent(elementId, newValue) {
         const element = document.getElementById(elementId);
         if (element && element.textContent !== newValue) {
-            element.textContent = newValue; // Update only if the value has changed
+            element.textContent = newValue;
         }
     }
 
-    // Listen for connection status changes
+    function updatePrediction() {
+        const { temperature, humidity, gasResistance } = fetchSensorData();
+        if (!isNaN(temperature) && !isNaN(humidity) && !isNaN(gasResistance)) {
+            const predictions = {
+                airQuality: predictAirQuality(temperature, humidity, gasResistance),
+                dewPoint: `${calculateDewPoint(temperature, humidity)} °C`,
+                heatIndex: `${calculateHeatIndex(temperature, humidity)} °C`,
+                comfortLevel: calculateComfortLevel(temperature, humidity, gasResistance),
+            };
+            applyPredictions(predictions);
+        } else {
+            applyPredictions({
+                airQuality: "Prediction unavailable.",
+                dewPoint: "-- °C",
+                heatIndex: "-- °C",
+                comfortLevel: "Unavailable",
+            });
+        }
+    }
+
+    function applyPredictions(predictions) {
+        updateTextContent("prediction", predictions.airQuality);
+        updateTextContent("dewPoint", predictions.dewPoint);
+        updateTextContent("heatIndex", predictions.heatIndex);
+        updateTextContent("comfortLevel", predictions.comfortLevel);
+        console.log("Updated Predictions:", predictions);
+    }
+
     function setupNetworkListener() {
         window.addEventListener("online", () => {
             console.log("Connection restored. Updating predictions...");
-            updatePrediction(); // Trigger an immediate update when connection is restored
+            updatePrediction();
         });
 
         window.addEventListener("offline", () => {
@@ -99,13 +103,17 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    setInterval(updatePrediction, 10000);
+    function setupCarousel() {
+        const carouselElement = document.querySelector("#predictionCarousel");
+        new bootstrap.Carousel(carouselElement, { interval: 5000 });
+    }
 
-    const carouselElement = document.querySelector("#predictionCarousel");
-    const bootstrapCarousel = new bootstrap.Carousel(carouselElement, {
-        interval: 5000,
-    });
+    function initializeApp() {
+        setupNetworkListener();
+        setupCarousel();
+        setInterval(updatePrediction, 10000);
+        updatePrediction();
+    }
 
-    setupNetworkListener();
-    updatePrediction();
+    initializeApp();
 });
