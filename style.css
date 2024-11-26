@@ -1,0 +1,133 @@
+/* Global Styling */
+body {
+    background-color: #20232a; /* Subtle dark background */
+    font-family: 'Roboto', Arial, sans-serif;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    user-select: none; /* Prevent text selection */
+}
+
+/* Header */
+header {
+    background: linear-gradient(90deg, #6a11cb, #2575fc); /* Vibrant gradient */
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    cursor: default; /* Default cursor for non-interactive elements */
+}
+
+/* Main Section */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Data Cards */
+.data-card {
+    border: 2px solid #3a3f47;
+    border-radius: 12px;
+    background: #2b303b;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    color: #ffffff;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.6);
+    user-select: none; /* Prevent text selection */
+    cursor: pointer; /* Pointer cursor for hoverable elements */
+}
+
+.data-card:hover {
+    transform: scale(1.05);
+    background-color: #344356;
+}
+
+/* Data Card Titles */
+.data-card .card-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #76e0c6;
+}
+
+/* Data Card Text */
+.data-card .card-text {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #f2a365;
+}
+
+/* Row Layout */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+/* Buttons */
+button {
+    font-size: 1.2rem;
+    padding: 12px 24px;
+    border-radius: 25px;
+    border: none;
+    color: #ffffff;
+    background-color: #2575fc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    user-select: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #6a11cb;
+}
+
+/* Prediction Section */
+.prediction-section {
+    background: #2b303b;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    margin: 20px 0;
+    width: 80%;
+    max-width: 600px;
+}
+
+.prediction-section h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #76e0c6;
+}
+
+.prediction-section p {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #f2a365;
+}
+
+p {
+    margin: 0;
+}
+
+/* Footer */
+footer {
+    background: #121212;
+    color: #bbbbbb;
+    text-align: center;
+    font-size: 0.9rem;
+    user-select: none; /* Prevent text selection */
+    cursor: default; /* Default cursor for non-interactive footer */
+}

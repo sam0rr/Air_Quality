@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Quality Monitoring</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="icon" href="favicon.jfif" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <header class="bg-dark text-white text-center py-4">
+        <h1 class="fw-bold">Air Quality Monitor</h1>
+    </header>
+
+    <main class="container my-4">
+        <!-- Bluetooth Connection Section -->
+        <div class="text-center mb-4">
+            <h3 class="text-light">Connect to ESP32 via Bluetooth</h3>
+            <button id="connectBluetoothButton" class="btn btn-outline-light mt-2">Connect to Device</button>
+            <small class="d-block text-muted mt-2">Ensure Bluetooth is enabled on your device.</small>
+        </div>
+
+        <!-- Real-Time Data Section -->
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="data-card">
+                    <h2 class="card-title">Temperature</h2>
+                    <p id="temperature" class="card-text">-- °C</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="data-card">
+                    <h2 class="card-title">Humidity</h2>
+                    <p id="humidity" class="card-text">-- %</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="data-card">
+                    <h2 class="card-title">Pressure</h2>
+                    <p id="pressure" class="card-text">-- hPa</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="data-card">
+                    <h2 class="card-title">Gas Resistance</h2>
+                    <p id="gasResistance" class="card-text">-- Ω</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="data-card">
+                    <h2 class="card-title">VOC Level</h2>
+                    <p id="vocLevel" class="card-text">--</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Prediction Section -->
+        <div class="prediction-section text-center mt-4">
+            <h3 class="text-light">Predicted Air Quality</h3>
+            <p id="prediction" class="fs-4 text-light">--</p>
+        </div>
+    </main>
+
+    <footer class="text-center py-3">
+        <p>© 2024 Air Quality Monitor. All Rights Reserved.</p>
+    </footer>
+
+    <script src="app.js"></script>
+    <script src="predict.js"></script>
+</body>
+</html>
