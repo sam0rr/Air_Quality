@@ -98,6 +98,28 @@ document.addEventListener("DOMContentLoaded", async function () {
         dataCharacteristic = null;
     }
 
+    function attachCardListeners() {
+        document.querySelectorAll(".data-card").forEach((card) => {
+            card.addEventListener("click", () => {
+                const cardTitle = card.querySelector(".card-title").textContent.trim();
+                explainData(cardTitle);
+            });
+        });
+    }
+
+    function explainData(cardTitle) {
+        const explanations = {
+            Temperature: "Temperature represents the current ambient temperature in degrees Celsius (°C).",
+            Humidity: "Humidity measures the amount of water vapor in the air as a percentage.",
+            Pressure: "Pressure indicates the atmospheric pressure in hectopascals (hPa).",
+            "Gas Resistance": "Gas resistance represents the sensor's resistance to certain gases, measured in ohms (Ω).",
+            "VOC Level": "VOC Level evaluates the air quality based on gas resistance, rated from 'Very Poor' to 'Excellent'.",
+        };
+
+        const explanation = explanations[cardTitle] || "No explanation available for this data.";
+        alert(`Explanation for ${cardTitle}:\n\n${explanation}`);
+    }
+
     document.getElementById("connectBluetoothButton").addEventListener("click", connectBluetooth);
 
     setInterval(() => {
@@ -107,4 +129,6 @@ document.addEventListener("DOMContentLoaded", async function () {
             console.log("No connection. Skipping periodic fetch.");
         }
     }, 10000);
+
+    attachCardListeners();
 });

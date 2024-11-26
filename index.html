@@ -18,7 +18,6 @@
         <div class="text-center mb-4">
             <h3 class="text-light">Connect to ESP32 via Bluetooth</h3>
             <button id="connectBluetoothButton" class="btn btn-outline-light mt-2">Connect to Device</button>
-            <small class="d-block text-muted mt-2">Ensure Bluetooth is enabled on your device.</small>
         </div>
 
         <div class="row g-4">
@@ -55,7 +54,7 @@
         </div>
 
         <!-- Prediction Carousel -->
-        <div id="predictionCarousel" class="carousel slide text-center mt-4" data-bs-ride="carousel">
+        <div id="predictionCarousel" class="carousel" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <h3>Predicted Air Quality</h3>
@@ -80,6 +79,7 @@
                     </div>
                 </div>
             </div>
+
             <button class="carousel-control-prev" type="button" data-bs-target="#predictionCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
@@ -88,13 +88,8 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#predictionCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
-                <button type="button" data-bs-target="#predictionCarousel" data-bs-slide-to="1"></button>
-                <button type="button" data-bs-target="#predictionCarousel" data-bs-slide-to="2"></button>
-                <button type="button" data-bs-target="#predictionCarousel" data-bs-slide-to="3"></button>
-            </div>
         </div>
+        
         
     </main>
 

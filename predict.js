@@ -66,33 +66,46 @@ document.addEventListener("DOMContentLoaded", function () {
             const heatIndex = calculateHeatIndex(temperature, humidity);
             const comfortLevel = calculateComfortLevel(temperature, humidity, gasResistance);
 
-            displayPrediction({ airQuality, dewPoint, heatIndex, comfortLevel });
+            updateTextContent("prediction", airQuality);
+            updateTextContent("dewPoint", `${dewPoint} °C`);
+            updateTextContent("heatIndex", `${heatIndex} °C`);
+            updateTextContent("comfortLevel", comfortLevel);
+
+            console.log("Updated Predictions:", { airQuality, dewPoint, heatIndex, comfortLevel });
         } else {
-            displayUnavailablePrediction();
+            updateTextContent("prediction", "Prediction unavailable.");
+            updateTextContent("dewPoint", "-- °C");
+            updateTextContent("heatIndex", "-- °C");
+            updateTextContent("comfortLevel", "Unavailable");
         }
     }
 
-    function displayPrediction({ airQuality, dewPoint, heatIndex, comfortLevel }) {
-        document.getElementById("prediction").textContent = airQuality;
-        document.getElementById("dewPoint").textContent = `${dewPoint} °C`;
-        document.getElementById("heatIndex").textContent = `${heatIndex} °C`;
-        document.getElementById("comfortLevel").textContent = comfortLevel;
-
-        console.log("Updated Predictions:", { airQuality, dewPoint, heatIndex, comfortLevel });
+    function updateTextContent(elementId, newValue) {
+        const element = document.getElementById(elementId);
+        if (element && element.textContent !== newValue) {
+            element.textContent = newValue; // Update only if the value has changed
+        }
     }
 
-    function displayUnavailablePrediction() {
-        document.getElementById("prediction").textContent = "Prediction unavailable.";
-        document.getElementById("dewPoint").textContent = "-- °C";
-        document.getElementById("heatIndex").textContent = "-- °C";
-        document.getElementById("comfortLevel").textContent = "Unavailable";
+    // Listen for connection status changes
+    function setupNetworkListener() {
+        window.addEventListener("online", () => {
+            console.log("Connection restored. Updating predictions...");
+            updatePrediction(); // Trigger an immediate update when connection is restored
+        });
+
+        window.addEventListener("offline", () => {
+            console.log("Connection lost. Waiting for reconnection...");
+        });
     }
 
     setInterval(updatePrediction, 10000);
 
-    // Initialize Bootstrap Carousel
     const carouselElement = document.querySelector("#predictionCarousel");
     const bootstrapCarousel = new bootstrap.Carousel(carouselElement, {
-        interval: 5000, // Automatic slide every 5 seconds
+        interval: 5000,
     });
+
+    setupNetworkListener();
+    updatePrediction();
 });
