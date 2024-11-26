@@ -155,7 +155,7 @@ button:hover {
 .carousel-inner {
     align-items: center;
     justify-content: center;
-    height: 150px;
+    min-height: 150px;
     text-align: center;
 }
 
@@ -189,7 +189,7 @@ button:hover {
     font-size: var(--prediction-font-size);
     font-weight: bold;
     color: var(--highlight-color);
-    width: 60%;
+    max-width: 60%;
     min-height: 50px;
 }
 
@@ -251,6 +251,7 @@ p {
     justify-content: center;
     align-items: center;
     margin: 0;
+    margin-bottom: 2rem;
 }
 
 .carousel p {
