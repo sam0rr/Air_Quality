@@ -1,7 +1,7 @@
 :root {
     /* Global Colors */
     --background-color: #20232a;
-    --header-gradient: linear-gradient(90deg, #76e0c6, #2575fc);
+    --header-gradient: linear-gradient(90deg, #76e0c6, #f2a365);
     --card-background: #2b303b;
     --card-hover-background: #344356;
     --card-border-color: #3a3f47;
@@ -9,7 +9,7 @@
     --text-secondary: #bbbbbb;
     --title-color: #76e0c6;
     --highlight-color: #f2a365;
-    --button-background: #2575fc;
+    --button-background: #f2a365;
     --button-hover-background: #6a11cb;
     --footer-background: var(--header-gradient);
 

@@ -13,13 +13,56 @@ document.addEventListener("DOMContentLoaded", function () {
         return (temperature - ((100 - humidity) / 5)).toFixed(2);
     }
 
-    function calculateHeatIndex(temperature, humidity) {
+    function isHeatIndexApplicable(temperature) {
+        return temperature >= 18;
+    }
+
+    function calculateBaseHeatIndex(temperature, humidity) {
+        const c1 = -42.379,
+            c2 = 2.04901523,
+            c3 = 10.14333127,
+            c4 = -0.22475541,
+            c5 = -0.00683783,
+            c6 = -0.05481717,
+            c7 = 0.00122874,
+            c8 = 0.00085282,
+            c9 = -0.00000199;
+
         return (
-            -8.784 +
-            1.611 * temperature +
-            2.338 * humidity -
-            0.146 * temperature * humidity
-        ).toFixed(2);
+            c1 +
+            c2 * temperature +
+            c3 * humidity +
+            c4 * temperature * humidity +
+            c5 * temperature * temperature +
+            c6 * humidity * humidity +
+            c7 * temperature * temperature * humidity +
+            c8 * temperature * humidity * humidity +
+            c9 * temperature * temperature * humidity * humidity
+        );
+    }
+
+    function applyLowHumidityAdjustment(heatIndex, temperature, humidity) {
+        if (humidity < 13 && temperature >= 27 && temperature <= 43) {
+            heatIndex -= ((13 - humidity) / 4) * Math.sqrt((17 - Math.abs(temperature - 27)) / 17);
+        }
+        return heatIndex;
+    }
+
+    function applyHighHumidityAdjustment(heatIndex, temperature, humidity) {
+        if (humidity > 85 && temperature >= 27 && temperature <= 35) {
+            heatIndex += ((humidity - 85) / 10) * ((35 - temperature) / 5);
+        }
+        return heatIndex;
+    }
+
+    function calculateHeatIndex(temperature, humidity) {
+        if (!isHeatIndexApplicable(temperature)) return temperature.toFixed(2);
+
+        let heatIndex = calculateBaseHeatIndex(temperature, humidity);
+        heatIndex = applyLowHumidityAdjustment(heatIndex, temperature, humidity);
+        heatIndex = applyHighHumidityAdjustment(heatIndex, temperature, humidity);
+
+        return heatIndex.toFixed(2);
     }
 
     function calculateComfortLevel(temperature, humidity, gasResistance) {
