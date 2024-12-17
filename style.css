@@ -1,5 +1,4 @@
 :root {
-    /* Global Colors */
     --background-color: #20232a;
     --header-gradient: linear-gradient(90deg, #76e0c6, #f2a365);
     --card-background: #2b303b;
@@ -13,11 +12,9 @@
     --button-hover-background: #6a11cb;
     --footer-background: var(--header-gradient);
 
-    /* Shadows */
     --card-shadow: 0 6px 10px rgba(0, 0, 0, 0.6);
     --button-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
 
-    /* Font Sizes */
     --header-font-size: 2rem;
     --title-font-size: 1.6rem;
     --text-font-size: 1.3rem;
@@ -31,7 +28,6 @@
     font-style: normal;
 }
   
-
 body {
     background-color: var(--background-color);
     font-family: "Protest Revolution", sans-serif;
@@ -42,10 +38,9 @@ body {
     flex-direction: column;
     justify-content: space-between;
     min-height: 100vh;
-    user-select: none; /* Prevent text selection */
+    user-select: none;
 }
 
-/* Header */
 header {
     background: var(--header-gradient);
     color: var(--text-primary);
@@ -56,7 +51,6 @@ header {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
-/* Main Section */
 main {
     flex: 1;
     display: flex;
@@ -66,7 +60,6 @@ main {
     padding-inline: 2rem;
 }
 
-/* Data Cards */
 .data-card {
     border: 2px solid var(--card-border-color);
     border-radius: 12px;
@@ -96,7 +89,6 @@ main {
     color: var(--highlight-color);
 }
 
-/* Row Layout */
 .row {
     display: flex;
     flex-wrap: wrap;
@@ -112,7 +104,6 @@ button {
     margin-inline: 0.5rem;
 }
 
-/* Carousel Container */
 #predictionCarousel {
     border: 2px solid var(--card-border-color);
     background: var(--card-background);
@@ -130,7 +121,6 @@ button {
     flex-direction: column !important;
 
 }
-
 
 .predict-body {
     display: flex;
@@ -194,7 +184,6 @@ button {
     min-height: 50px;
 }
 
-/* Carousel Navigation Buttons */
 .carousel-control-prev,
 .carousel-control-next {
     width: 5%;
@@ -209,7 +198,6 @@ button {
     opacity: 1;
 }
 
-/* Footer */
 footer {
     background: var(--footer-background);
     color: var(--text-primary);

@@ -14,7 +14,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function isHeatIndexApplicable(temperature) {
-        return temperature >= 18;
+        return temperature >= 27;
+    }
+
+    function clampValues(temperature, humidity) {
+        temperature = Math.min(Math.max(temperature, -10), 60);
+        humidity = Math.min(Math.max(humidity, 0), 100);
+        return { temperature, humidity };
     }
 
     function calculateBaseHeatIndex(temperature, humidity) {
@@ -56,11 +62,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function calculateHeatIndex(temperature, humidity) {
+        ({ temperature, humidity } = clampValues(temperature, humidity));
+
         if (!isHeatIndexApplicable(temperature)) return temperature.toFixed(2);
 
         let heatIndex = calculateBaseHeatIndex(temperature, humidity);
         heatIndex = applyLowHumidityAdjustment(heatIndex, temperature, humidity);
         heatIndex = applyHighHumidityAdjustment(heatIndex, temperature, humidity);
+
+        heatIndex = Math.min(Math.max(heatIndex, temperature), 80);
 
         return heatIndex.toFixed(2);
     }
@@ -75,12 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ) {
             return "Very Comfortable";
         }
-        if (
-            temperature < 22 ||
-            temperature > 26 ||
-            humidity < 30 ||
-            humidity > 70
-        ) {
+        if (temperature < 22 || temperature > 26 || humidity < 30 || humidity > 70) {
             return "Uncomfortable";
         }
         return "Moderately Comfortable";
